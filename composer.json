@@ -1,0 +1,31 @@
+{
+	"name": "phix/optionals",
+	"description": "Optionals is an incredibly lightweight and high performance DI container for PHP 5.4 and above",
+	"keywords": [
+		"dependency injection"
+	],
+	"homepage": "https://github.com/stuartherbert/OptionalsLib/",
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Stuart Herbert",
+			"email": "stuart@stuartherbert.com",
+			"homepage": "http://www.stuartherbert.com",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/stuartherbert/OptionalsLib/issues",
+		"source": "https://github.com/stuartherbert/OptionalsLib/"
+	},
+	"autoload": {
+		"psr-0": { "" : "src/php/" }
+	},
+	"require": {
+		"phix/autoloader": "4.*",
+		"phix/exceptionslib": "1.*"
+	},
+	"require-dev": {
+		"phix/autoloader": "4.*"
+	}
+}
