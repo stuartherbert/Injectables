@@ -34,22 +34,16 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package     Phix_Project
- * @subpackage  OptionalsLib
+ * @subpackage  Injectables
  * @author      Stuart Herbert <stuart@stuartherbert.com>
  * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link        http://www.phix-project.org
  */
 
-namespace Phix_Project\OptionalsLib;
+namespace Phix_Project\Injectables;
 
-use Phix_Project\ExceptionsLib1\E5xx_InternalServerErrorException;
-
-class E5xx_InvalidOptionalDependency extends E5xx_InternalServerErrorException
+trait BadTestTrait
 {
-	public function __construct($depName)
-	{
-		$msg = "Invalid or incomplete optional dependency '{$depName}'";
-		parent::__construct($msg);
-	}
+	public $falseOrTrue = false;
 }

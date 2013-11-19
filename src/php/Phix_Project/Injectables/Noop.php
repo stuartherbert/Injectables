@@ -34,20 +34,33 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package     Phix_Project
- * @subpackage  OptionalsLib
+ * @subpackage  Injectables
  * @author      Stuart Herbert <stuart@stuartherbert.com>
  * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link        http://www.phix-project.org
  */
 
-namespace Phix_Project\OptionalsLib;
+namespace Phix_Project\Injectables;
 
-class TrueOrFalse
+/**
+ * Dummy that does nothing
+ *
+ * You can use this in your traits if you don't want to litter your code
+ * with 'if' statements for optional dependencies
+ *
+ * @package     Phix_Project
+ * @subpackage  Injectables
+ * @author      Stuart Herbert <stuart@stuartherbert.com>
+ * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
+ * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @link        http://www.phix-project.org
+ */
+
+class Noop
 {
-	public function isTrue($expression)
+	public function __call($methodName, $params)
 	{
-		if ($expression) return true;
-		return false;
+		return null;
 	}
 }

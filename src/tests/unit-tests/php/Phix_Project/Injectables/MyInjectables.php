@@ -34,21 +34,18 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package     Phix_Project
- * @subpackage  OptionalsLib
+ * @subpackage  Injectables
  * @author      Stuart Herbert <stuart@stuartherbert.com>
  * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link        http://www.phix-project.org
  */
 
-namespace Phix_Project\OptionalsLib;
+namespace Phix_Project\Injectables;
 
-trait TestTrait
+use Phix_Project\Injectables;
+
+class MyInjectables extends Injectables
 {
-	public $trueOrFalse = false;
-
-	public function initTrueOrFalse()
-	{
-		$this->trueOrFalse = new TrueOrFalse();
-	}
+	use TestTrait;
 }

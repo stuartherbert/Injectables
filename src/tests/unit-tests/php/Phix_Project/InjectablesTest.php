@@ -34,32 +34,33 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package     Phix_Project
- * @subpackage  OptionalsLib
+ * @subpackage  Injectables
  * @author      Stuart Herbert <stuart@stuartherbert.com>
  * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link        http://www.phix-project.org
  */
 
-namespace Phix_Project\OptionalsLib;
+namespace Phix_Project\Injectables;
 
 use PHPUnit_Framework_TestCase;
+use Phix_Project\Injectables;
 
-class OptionalsTest extends PHPUnit_Framework_TestCase
+class InjectablesTest extends PHPUnit_Framework_TestCase
 {
 	public function testCanInstantiate()
 	{
 	    // ----------------------------------------------------------------
 	    // perform the change
 	    //
-	    // make sure we can create objects of type 'Optionals'
+	    // make sure we can create objects of type 'Injectables'
 
-	    $optionals = new Optionals();
+	    $Injectables = new Injectables();
 
 	    // ----------------------------------------------------------------
 	    // test the results
 
-	    $this->assertTrue($optionals instanceof Optionals);
+	    $this->assertTrue($Injectables instanceof Injectables);
 	}
 
 	public function testCanInstantiateTestContainer()
@@ -68,14 +69,14 @@ class OptionalsTest extends PHPUnit_Framework_TestCase
 	    // perform the change
 	    //
 	    // make sure we can create our own objects that inherit from
-	    // the 'Optionals' container
+	    // the 'Injectables' container
 
-	    $myOptionals = new MyOptionals();
+	    $myInjectables = new MyInjectables();
 
 	    // ----------------------------------------------------------------
 	    // test the results
 
-	    $this->assertTrue($myOptionals instanceof Optionals);
+	    $this->assertTrue($myInjectables instanceof Injectables);
 	}
 
 	public function testCanValidateCorrectTestContainer()
@@ -83,18 +84,18 @@ class OptionalsTest extends PHPUnit_Framework_TestCase
 	    // ----------------------------------------------------------------
 	    // setup your test
 
-	    $myOptionals = new MyOptionals();
+	    $myInjectables = new MyInjectables();
 	    $expectedResult = true;
 
 	    // ----------------------------------------------------------------
 	    // perform the change
 	    //
 	    // make sure we can successfully validate the definition of our
-	    // own optionals container
+	    // own Injectables container
 
 	    $actualResult = true;
 	   	try {
-	   		$myOptionals->requireValidOptionals();
+	   		$myInjectables->requireValidInjectables();
 	   	}
 	   	catch (\Exception $e) {
 	   		$actualResult = false;
@@ -111,18 +112,18 @@ class OptionalsTest extends PHPUnit_Framework_TestCase
 	    // ----------------------------------------------------------------
 	    // setup your test
 
-	    $myOptionals = new MyBadOptionals();
+	    $myInjectables = new MyBadInjectables();
 	    $expectedResult = false;
 
 	    // ----------------------------------------------------------------
 	    // perform the change
 	    //
 	    // make sure we can correctly detect when there are problems with
-	    // the contents of the optionals container
+	    // the contents of the Injectables container
 
 	    $actualResult = true;
 	   	try {
-	   		$myOptionals->requireValidOptionals();
+	   		$myInjectables->requireValidInjectables();
 	   	}
 	   	catch (\Exception $e) {
 	   		$actualResult = false;
@@ -142,7 +143,7 @@ class OptionalsTest extends PHPUnit_Framework_TestCase
 	    // missing AND uninitialised dependencies are both the same thing
 	    // as far as the caller is concerned, and both resolve to FALSE
 
-	    $myOptionals     = new MyOptionals();
+	    $myInjectables     = new MyInjectables();
 	    $expectedResults = array(
 	    	"trueOrFalse" => false,
 	    	"falseOrTrue" => NULL
@@ -153,7 +154,7 @@ class OptionalsTest extends PHPUnit_Framework_TestCase
 
 	    $actualResults = [];
 	    foreach ($expectedResults as $prop => $expectedResult) {
-	    	$actualResults[$prop] = $myOptionals->$prop;
+	    	$actualResults[$prop] = $myInjectables->$prop;
 	    }
 
 	    // ----------------------------------------------------------------
@@ -170,8 +171,8 @@ class OptionalsTest extends PHPUnit_Framework_TestCase
 	    // make sure we can call a dependency if it has been supplied
 	    // and initialised
 
-	    $myOptionals = new MyOptionals();
-	    $myOptionals->initTrueOrFalse();
+	    $myInjectables = new MyInjectables();
+	    $myInjectables->initTrueOrFalse();
 	    $expectedResults = [
 	    	"trueOrFalse" => true,
 	    	"falseOrTrue" => NULL
@@ -182,8 +183,8 @@ class OptionalsTest extends PHPUnit_Framework_TestCase
 
 	    $actualResults = [];
 	    foreach ($expectedResults as $prop => $expectedResult) {
-	    	if ($myOptionals->$prop) {
-	    		$actualResults[$prop] = $myOptionals->$prop->isTrue(1);
+	    	if ($myInjectables->$prop) {
+	    		$actualResults[$prop] = $myInjectables->$prop->isTrue(1);
 	    	}
 	    	else {
 	    		$actualResults[$prop] = NULL;

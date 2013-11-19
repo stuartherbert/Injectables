@@ -34,59 +34,20 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package     Phix_Project
- * @subpackage  OptionalsLib
+ * @subpackage  Injectables
  * @author      Stuart Herbert <stuart@stuartherbert.com>
  * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link        http://www.phix-project.org
  */
 
-namespace Phix_Project\OptionalsLib;
+namespace Phix_Project\Injectables;
 
-/**
- * Dependency container
- *
- * @package     Phix_Project
- * @subpackage  OptionalsLib
- * @author      Stuart Herbert <stuart@stuartherbert.com>
- * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
- * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link        http://www.phix-project.org
- */
-
-class Optionals
+class TrueOrFalse
 {
-	/**
-	 * Magic method for handling attempts to access an optional dependency
-	 * that hasn't been supplied this time
-	 *
-	 * @param  string $property
-	 *         the name of the dependency that the caller is trying to use
-	 * @return null
-	 *         NULL - there is no such dependency available
-	 */
-	public function __get($property)
+	public function isTrue($expression)
 	{
-		// all done
-		return null;
+		if ($expression) return true;
+		return false;
 	}
-
-	public function requireValidOptionals()
-	{
-		// sanity check - make sure that every optional dependency
-		// has the expected interface
-		//
-		// you wouldn't normally call this in your app, just in your
-		// unit tests
-
-		foreach ($this as $prop => $value)
-		{
-			$methodName = 'init' . ucfirst($prop);
-			if (!method_exists($this, $methodName)) {
-				throw new E5xx_InvalidOptionalDependency($prop);
-			}
-		}
-	}
-
-
 }

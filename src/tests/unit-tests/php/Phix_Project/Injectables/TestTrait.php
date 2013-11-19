@@ -34,30 +34,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package     Phix_Project
- * @subpackage  OptionalsLib
+ * @subpackage  Injectables
  * @author      Stuart Herbert <stuart@stuartherbert.com>
  * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link        http://www.phix-project.org
  */
 
-namespace Phix_Project\OptionalsLib;
+namespace Phix_Project\Injectables;
 
-/**
- * Dummy that does nothing
- *
- * @package     Phix_Project
- * @subpackage  OptionalsLib
- * @author      Stuart Herbert <stuart@stuartherbert.com>
- * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
- * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link        http://www.phix-project.org
- */
-
-class Noop
+trait TestTrait
 {
-	public function __call($methodName, $params)
+	public $trueOrFalse = false;
+
+	public function initTrueOrFalse()
 	{
-		return null;
+		$this->trueOrFalse = new TrueOrFalse();
 	}
 }

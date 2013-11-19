@@ -34,16 +34,59 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package     Phix_Project
- * @subpackage  OptionalsLib
+ * @subpackage  Injectables
  * @author      Stuart Herbert <stuart@stuartherbert.com>
  * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link        http://www.phix-project.org
  */
 
-namespace Phix_Project\OptionalsLib;
+namespace Phix_Project;
 
-class MyOptionals extends Optionals
+use Phix_Project\Injectables\E5xx_InvalidInjectable;
+
+/**
+ * Dependency container
+ *
+ * @package     Phix_Project
+ * @subpackage  Injectables
+ * @author      Stuart Herbert <stuart@stuartherbert.com>
+ * @copyright   2013-present Stuart Herbert. www.stuartherbert.com
+ * @license     http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @link        http://www.phix-project.org
+ */
+
+class Injectables
 {
-	use TestTrait;
+	/**
+	 * Magic method for handling attempts to access an optional dependency
+	 * that hasn't been supplied this time
+	 *
+	 * @param  string $property
+	 *         the name of the dependency that the caller is trying to use
+	 * @return null
+	 *         NULL - there is no such dependency available
+	 */
+	public function __get($property)
+	{
+		// all done
+		return null;
+	}
+
+	public function requireValidInjectables()
+	{
+		// sanity check - make sure that every dependency
+		// has the expected interface
+		//
+		// you wouldn't normally call this in your app, just in your
+		// unit tests
+
+		foreach ($this as $prop => $value)
+		{
+			$methodName = 'init' . ucfirst($prop);
+			if (!method_exists($this, $methodName)) {
+				throw new E5xx_InvalidInjectable($prop);
+			}
+		}
+	}
 }
